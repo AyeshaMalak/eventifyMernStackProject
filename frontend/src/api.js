@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const API = axios.create({
-  baseURL: "https://eventify-mern-stack-project-oion.vercel.app/api",
+  baseURL: import.meta.env.VITE_API_URL,
 });
