@@ -15,20 +15,26 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-//Cors
+
+// ✅ Allowed origins
+const allowedOrigins = [
+  "http://localhost:5174",  // local dev
+  "https://eventify-mern-stack-project-9pyn.vercel.app" // deployed frontend
+];
+
 app.use(
   cors({
-    origin: "http://localhost:5174",
+    origin: allowedOrigins,
     credentials: true,
   })
 );
 
 // Routes
-app.use("/api/auth", authRoutes); // Register/Login
-app.use("/api/events", eventRoutes); // Public + CRUD events
-app.use("/api/registrations", registrationsRoute); // User registrations
-app.use("/api/event-registrations", eventRegistrations); // Event-wise registrations
-app.use("/api/admin", adminRoutes); // Admin-specific routes
+app.use("/api/auth", authRoutes);
+app.use("/api/events", eventRoutes);
+app.use("/api/registrations", registrationsRoute);
+app.use("/api/event-registrations", eventRegistrations);
+app.use("/api/admin", adminRoutes);
 
 // DB Connection
 mongoose
